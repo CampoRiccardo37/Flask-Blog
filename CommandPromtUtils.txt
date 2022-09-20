@@ -1,0 +1,10 @@
+Esegue il programma flask 
+flask run
+
+#Serve per settare la variabile FLASK_APP un file da cui partire 
+Linux       :   export FLASK_APP=application.py
+Windows     :   set FLASK_APP=application.py #(Forse il python è tra virgolette)
+Powershell  :   $env:FLASK_APP="application.py"
+
+#Serve per passare tutte le dipendenze di un VirtualEnv in un file che in questo caso si chiama requirements.txt
+pip freeze > requirements.txt 
