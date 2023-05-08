@@ -1,21 +1,21 @@
 from flask import render_template
+
 from blog import app
+from blog.models import Post
 
 
 
 @app.route("/")
 def homepage():
-    posts = [
-        {"title":"primo POST", "body":"random"},
-        {"title":"secondo POST", "body":"Some random"}
-    ]
-    some_bool = False
-    return render_template( 
-                            "homepage.html", 
-                            posts=posts, 
-                            boolean_flag=some_bool
-                        )
+    posts = Post.query.order_by(Post.created_at.desc()).all()
+    return render_template( "homepage.html", posts=posts )
 
 @app.route("/about")
 def about():
     return render_template( "about_page.html")
+
+
+@app.route("/posts/<int:post_id>/")
+def post_detail(post_id):
+    post_instance = Post.query.get_or_404(post_id)
+    return render_template("post_detail.html",post=post_instance)
